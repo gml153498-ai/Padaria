@@ -1,0 +1,271 @@
+/* ===== Estilo geral ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #EBDDC5; /* Pearl */
+    color: #2E4365; /* Police Blue */
+}
+
+header {
+    background-color: #2E4365; /* Police Blue */
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: #F3D58D; /* Buff */
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+/* ===== Formulário ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 40px auto; /* Ajuste no margin para centralizar com mais espaçamento */
+}
+
+h2 {
+    text-align: center;
+    color: #2E4365; /* Police Blue */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+input, button {
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #E59D2C; /* Marigold */
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #C88420;
+}
+
+/* ===== Produtos ===== */
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.produto {
+    background-color: #F3D58D; /* Buff */
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.produto img {
+    width: 50%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.produto h4 {
+    margin: 10px 0 5px 0;
+    font-size: 18px;
+}
+
+.produto p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #2E4365;
+}
+
+/* ===== Controles de quantidade ===== */
+.controle {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.controle button {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.controle .comprar {
+    background-color: #E59D2C;
+    color: white;
+}
+
+.controle .comprar:hover {
+    background-color: #C88420;
+}
+
+.controle button:not(.comprar) {
+    background-color: #2E4365;
+    color: #F3D58D;
+}
+
+.controle button:not(.comprar):hover {
+    background-color: #1f2e4b;
+}
+
+/* ===== Carrinho ===== */
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F3D58D;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.item-carrinho button.remover {
+    background-color: #8E3B2E; /* Citrine Brown */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 8px;
+}
+
+.item-carrinho button.remover:hover {
+    background-color: #67271f;
+}
+
+.botao-finalizar {
+    background-color: #E59D2C;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+.carrinho-item {
+    background: #F3D58D;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.carrinho-item button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #8E3B2E;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.carrinho-item button:hover {
+    background-color: #732C24;
+}
+
+
+.botao-finalizar:hover {
+    background-color: #C88420;
+}
+/* ====== Geral ====== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #DCC9B0; /* tom claro */
+    color: #555842; /* verde escuro */
+}
+
+header {
+    background-color:  #2E4365;
+    color: #DCC9B0;
+    padding: 15px;
+    text-align: center;
+}
+
+header nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #DCC9B0;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #D6A87C;
+}
+
+main {
+    text-align: center;
+    margin: 20px;
+}
+
+.pagamentos button {
+    display: block;
+    width: 200px;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background-color: #555842;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.pagamentos button:hover {
+    background-color: #D6A87C;
+    color: #000;
+}
+
+#pix-section, #dinheiro-section {
+    margin-top: 20px;
+    display: none;
+}
+
+img.qrcode {
+    width: 200px;
+    margin-top: 10px;
+}
+
+/* Botão Ver Perfil */
+.btn-perfil {
+    background-color: #355E3B; /* Verde musgo */
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-perfil:hover {
+    background-color: #E59D2C; /* Marigold */
+    color: #fff;
+}
+
+
