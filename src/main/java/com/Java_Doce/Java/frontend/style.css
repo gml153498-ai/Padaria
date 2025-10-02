@@ -267,5 +267,40 @@ img.qrcode {
     background-color: #E59D2C; /* Marigold */
     color: #fff;
 }
+/* Botão flutuante no canto */
+.btn-perfil-flutuante {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background-color: #355E3B; /* Verde musgo */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.btn-perfil-flutuante:hover {
+    background-color: #E59D2C;
+}
+
+/* Card de perfil flutuante */
+.perfil-card {
+    position: fixed;
+    top: 150px;
+    right: 20px;
+    width: 250px;
+    background: #f5f5f5;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    z-index: 999;
+    font-size: 14px;
+}
 
 

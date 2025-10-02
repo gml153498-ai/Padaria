@@ -38,4 +38,38 @@ function adicionarTodos() {
 
     alert("Todos os produtos selecionados foram adicionados ao carrinho!");
 }
+// Carregar perfil
+function carregarPerfil() {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const card = document.getElementById("perfil-card");
+
+    if (usuario) {
+        card.innerHTML = `
+            <h3>👤 Perfil</h3>
+            <p><strong>Nome:</strong> ${usuario.nome}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+            <p><strong>Telefone:</strong> ${usuario.telefone}</p>
+            <a class="btn-perfil" href="cadastro.html">Editar Perfil</a>
+        `;
+    } else {
+        card.innerHTML = `
+            <h3>👤 Perfil</h3>
+            <p>Nenhum cadastro encontrado.</p>
+            <a class="btn-perfil" href="cadastro.html">Cadastrar</a>
+        `;
+    }
+}
+
+// Alternar visibilidade do card
+document.getElementById("btnPerfil").addEventListener("click", function(){
+    const card = document.getElementById("perfil-card");
+    if(card.style.display === "none" || card.style.display === ""){
+        card.style.display = "block";
+    } else {
+        card.style.display = "none";
+    }
+});
+
+// Chamar ao carregar página
+window.onload = carregarPerfil;
 

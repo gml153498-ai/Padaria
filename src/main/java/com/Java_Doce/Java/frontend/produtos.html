@@ -10,10 +10,11 @@
 <header>
     <h1>Padaria Medeiros</h1>
     <nav>
-        <a href="cadastro.html">Cadastro</a>
+
         <a href="produtos.html">Produtos</a>
         <a href="carrinho.html">Carrinho</a>
-        <a href="sobre.html">Sobre Nós</a>
+        <a href="sobre.html">Sobre</a>
+
         <script src="produtos.js"></script>
 
     </nav>
@@ -75,7 +76,7 @@
 
         <div class="produto" id="item-4">
             <img src="https://i.pinimg.com/736x/3e/ea/5f/3eea5fd0c1fa3cec2e17066f3724f870.jpg" alt="Salgado de Carne-Grande">
-            <h4>Carne</h4>
+            <h4>Salgado de Carne</h4>
             <p>R$ 6,00</p>
             <div class="controle">
                 <button onclick="remover(4)">-</button>
@@ -92,7 +93,7 @@
         <div class="produto" id="item-5">
             <img src="https://guiadacozinha.com.br/wp-content/uploads/2024/05/bolodecenoura-350x230.jpg" alt="Bolo de Cenoura">
             <h4>Bolo de Cenoura</h4>
-            <p>R$ 28,00</p>
+            <p>R$ 7,00</p>
             <div class="controle">
                 <button onclick="remover(5)">-</button>
                 <span id="qtd-5">0</span>
@@ -104,7 +105,7 @@
         <div class="produto" id="item-6">
             <img src="https://www.comidaereceitas.com.br/wp-content/uploads/2018/06/Bolo-de-chocolate-com-ganache-e-morango-freepik-780x780.jpg" alt="Bolo de Chocolate">
             <h4>Bolo de Chocolate</h4>
-            <p>R$ 22,00</p>
+            <p>R$ 30,00</p>
             <div class="controle">
                 <button onclick="remover(6)">-</button>
                 <span id="qtd-6">0</span>
@@ -116,7 +117,7 @@
         <div class="produto" id="item-7">
             <img src="https://i.pinimg.com/1200x/fb/81/5f/fb815f60db0e1fec7bdd9b77546f7228.jpg" alt="Bolo de Baunilha">
             <h4>Bolo de Baunilha</h4>
-            <p>R$ 22,00</p>
+            <p>R$ 32,00</p>
             <div class="controle">
                 <button onclick="remover(7)">-</button>
                 <span id="qtd-7">0</span>
@@ -156,7 +157,7 @@
         <div class="produto" id="item-10">
             <img src="https://i.pinimg.com/736x/a5/b8/df/a5b8df7021ed35e813fe65a769d30e5a.jpg" alt="Pão Careca-Unidade">
             <h4>Pão Careca-Unidade</h4>
-            <p>R$ 3,00</p>
+            <p>R$ 0,75</p>
             <div class="controle">
                 <button onclick="remover(10)">-</button>
                 <span id="qtd-10">0</span>
@@ -172,7 +173,7 @@
     <div class="produtos">
         <div class="produto" id="item-11">g
             <img src="https://www.receitasnestle.com.br/sites/default/files/styles/recipe_detail_desktop_new/public/srh_recipes/f22d1afce5e0c571203188dd0b200aa6.webp?itok=yxHLJFEJ" alt="Brigadeiro">
-            <h4>bombom na travessa</h4>
+            <h4>Bombom na travessa</h4>
             <p>R$ 10,00</p>
             <div class="controle">
                 <button onclick="remover(11)">-</button>
@@ -254,5 +255,53 @@
 
 
 <script src="produtos.js"></script>
+<!-- Botão flutuante -->
+<button id="btnPerfil" class="btn-perfil-flutuante">👤 Ver Perfil</button>
+
+<!-- Card do perfil -->
+<div id="perfil-card" class="perfil-card" style="display: none;"></div>
+
+<script>
+    function carregarPerfil() {
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const card = document.getElementById("perfil-card");
+
+        if (usuario) {
+            card.innerHTML = `
+            <h3>👤 Perfil</h3>
+            <p><strong>Nome:</strong> ${usuario.nome}</p>
+            <p><strong>Cpf:</strong> ${usuario.cpf}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+            <p><strong>Telefone:</strong> ${usuario.telefone}</p>
+            <p><strong>Data Nascimento:</strong> ${usuario.dataNascimento}</p>
+
+            <a class="btn-perfil" href="cadastro.html">Editar Perfil</a>
+        `;
+        } else {
+            card.innerHTML = `
+            <h3>👤 Perfil</h3>
+            <p>Nenhum cadastro encontrado.</p>
+            <a class="btn-perfil" href="cadastro.html">Cadastrar</a>
+        `;
+        }
+    }
+
+    window.onload = function() {
+        carregarPerfil();
+
+        const btn = document.getElementById("btnPerfil");
+        const card = document.getElementById("perfil-card");
+
+        btn.addEventListener("click", function() {
+            if(card.style.display === "none" || card.style.display === "") {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+</script>
+
+
 </body>
 </html>

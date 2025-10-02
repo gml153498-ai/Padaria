@@ -37,4 +37,33 @@ function carregarCarrinho() {
     let totalElement = document.createElement("p");
     totalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
     lista.appendChild(totalElement);
+}function adicionarAoCarrinho(produto) {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    // Verifica se o produto já está no carrinho
+    const index = carrinho.findIndex(item => item.id === produto.id);
+    if (index >= 0) {
+        carrinho[index].qtd += 1; // aumenta quantidade
+    } else {
+        produto.qtd = 1;
+        carrinho.push(produto);
+    }
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    alert(`${produto.nome} adicionado ao carrinho!`);
+}
+function adicionarAoCarrinho(produto) {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    // Verifica se o produto já está no carrinho
+    const index = carrinho.findIndex(item => item.id === produto.id);
+    if (index >= 0) {
+        carrinho[index].qtd += 1; // aumenta quantidade
+    } else {
+        produto.qtd = 1;
+        carrinho.push(produto);
+    }
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    alert(`${produto.nome} adicionado ao carrinho!`);
 }
