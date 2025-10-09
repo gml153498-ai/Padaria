@@ -8,18 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/usuarios")
 @RequiredArgsConstructor
 public class UsuarioController {
 
     private final UsuarioService usuarioService;  // <-- FINAL aqui
-
-    @PostMapping
-    public ResponseEntity<Void> salvarUsuario(@RequestBody Usuario usuario) {
+    @PostMapping("/usuarios")
+    public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
         usuarioService.SalvarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
     @GetMapping
     public ResponseEntity<Usuario> buscarUsuarioPorCpf(@RequestParam String cpf) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorCpf(cpf));
@@ -30,6 +31,7 @@ public class UsuarioController {
         usuarioService.deletarUsuarioPorCpf(cpf);
         return ResponseEntity.ok().build();
     }
+
 
     @PutMapping
     public ResponseEntity<Void> atualizarUsuarioPorCpf(@RequestParam String cpf,

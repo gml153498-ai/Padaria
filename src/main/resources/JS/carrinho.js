@@ -1,4 +1,4 @@
-document.getElementById("formUsuario").addEventListener("submit", async function (e) {
+document.getElementById("formUsuario").addEventListener("submit", async function(e) {
     e.preventDefault();
 
     const usuario = {
@@ -16,16 +16,15 @@ document.getElementById("formUsuario").addEventListener("submit", async function
             body: JSON.stringify(usuario)
         });
 
-        if (response.status === 201) {
+        if (response.ok) { // 200-299
             alert("✅ Usuário cadastrado com sucesso!");
-            // Redireciona para produtos
             window.location.href = "produtos.html";
         } else {
-            alert("⚠️ Erro ao cadastrar usuário.");
+            const errorData = await response.json();
+            alert("⚠️ Erro ao cadastrar: " + (errorData.message || "Erro desconhecido"));
         }
     } catch (error) {
         alert("⚠️ Erro de conexão com o servidor.");
         console.error(error);
     }
 });
-
