@@ -19,9 +19,10 @@ public class UsuarioService {
         this.repository = repository;
     }
 
-    public void SalvarUsuario(Usuario usuario) {
-        repository.saveAndFlush(usuario);
+    public Usuario SalvarUsuario(Usuario usuario) {
+        return repository.save(usuario);
     }
+
     public Usuario buscarUsuarioPorCpf(String cpf) {
         return repository.findByCpf(cpf)
                 .orElseThrow(() -> new RuntimeException("CPF nao encontrado"));

@@ -14,12 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;  // <-- FINAL aqui
-    @PostMapping("/usuarios")
+    private final UsuarioService usuarioService;
+
+    @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
+        System.out.println("Recebendo POST /usuarios -> " + usuario.getNome());
         usuarioService.SalvarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
     @GetMapping
     public ResponseEntity<Usuario> buscarUsuarioPorCpf(@RequestParam String cpf) {
