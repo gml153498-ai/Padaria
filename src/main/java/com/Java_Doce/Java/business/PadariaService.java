@@ -11,16 +11,15 @@ public class PadariaService {
 
     private final PadariaRepository padariaRepository;
 
-    // Construtor manual para injeção de dependência
     public PadariaService(PadariaRepository padariaRepository) {
         this.padariaRepository = padariaRepository;
     }
 
-    public void salvarPadaria(Padaria padaria){
-        padariaRepository.save(padaria);
+    public Padaria salvarPadaria(Padaria padaria){
+        return padariaRepository.save(padaria);
     }
 
-    public Padaria buscarPorId(Long id){
+    public Padaria buscarPorId(String id){
         return padariaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item não encontrado com ID: " + id));
     }
@@ -29,18 +28,18 @@ public class PadariaService {
         return padariaRepository.findAll();
     }
 
-    public void atualizarPadaria(Long id, Padaria novaPadaria){
+    public Padaria atualizarPadaria(String id, Padaria novaPadaria){
         Padaria existente = padariaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item de padaria não encontrado com ID: " + id));
 
-        existente.setNome(novaPadaria.getNome());
-        existente.setPreco(novaPadaria.getPreco());
-        existente.setQuantidade(novaPadaria.getQuantidade());
+        if (novaPadaria.getNome() != null) existente.setNome(novaPadaria.getNome());
+        if (novaPadaria.getPreco() != null) existente.setPreco(novaPadaria.getPreco());
+        if (novaPadaria.getQuantidade() != null) existente.setQuantidade(novaPadaria.getQuantidade());
 
-        padariaRepository.save(existente);
+        return padariaRepository.save(existente);
     }
 
-    public void deletarPorId(Long id){
+    public void deletarPorId(String id){
         padariaRepository.deleteById(id);
     }
 }

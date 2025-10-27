@@ -1,31 +1,24 @@
 package com.Java_Doce.Java.infrastructure.entitys;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "tb_padaria")
+@Document(collection = "produtos") // define a coleção no MongoDB
 public class Padaria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id; // MongoDB usa String para o ID
 
-    @Column(name = "nome")
     private String nome;
-
-    @Column(name = "preco")
     private Double preco;
-
-    @Column(name = "quantidade")
     private Integer quantidade;
 
     // ===== Getters e Setters =====
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

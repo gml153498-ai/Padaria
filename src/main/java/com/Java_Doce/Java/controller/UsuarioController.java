@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/usuarios")
@@ -19,14 +20,14 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
         System.out.println("Recebendo POST /usuarios -> " + usuario.getNome());
-        usuarioService.SalvarUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario); // chama método MongoDB
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
     }
-
 
     @GetMapping
     public ResponseEntity<Usuario> buscarUsuarioPorCpf(@RequestParam String cpf) {
-        return ResponseEntity.ok(usuarioService.buscarUsuarioPorCpf(cpf));
+        Usuario usuario = usuarioService.buscarUsuarioPorCpf(cpf);
+        return ResponseEntity.ok(usuario);
     }
 
     @DeleteMapping
@@ -35,17 +36,17 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
-
     @PutMapping
-    public ResponseEntity<Void> atualizarUsuarioPorCpf(@RequestParam String cpf,
-                                                       @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> atualizarUsuarioPorCpf(@RequestParam String cpf,
+                                                          @RequestBody Usuario usuario) {
         usuarioService.atualizarUsuarioPorCpf(cpf, usuario);
-        return ResponseEntity.ok().build();
+        Usuario usuarioAtualizado = usuarioService.buscarUsuarioPorCpf(cpf);
+        return ResponseEntity.ok(usuarioAtualizado);
     }
+
     @GetMapping("/todos")
     public ResponseEntity<List<Usuario>> listarTodos() {
-        return ResponseEntity.ok(usuarioService.listarTodos());
+        List<Usuario> usuarios = usuarioService.listarTodos();
+        return ResponseEntity.ok(usuarios);
     }
 }
-
-

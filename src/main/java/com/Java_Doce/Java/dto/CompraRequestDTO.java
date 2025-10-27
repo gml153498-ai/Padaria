@@ -9,8 +9,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class CompraRequestDTO {
-    private Long usuarioId;
-    private List<Long> produtosIds;
+    private String usuarioId;
+    private List<String> produtosIds;
     private Integer quantidade;
 }
 

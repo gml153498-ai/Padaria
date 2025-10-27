@@ -1,7 +1,9 @@
 package com.Java_Doce.Java.infrastructure.entitys;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
@@ -10,36 +12,28 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "tb_usuario")
-@Entity
+@Document(collection = "tb_usuario") // equivalente ao @Table
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
-    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "cpf", unique = true)
+    @Indexed(unique = true)
     private String cpf;
 
-    @Column(name = "datanascimento")
     private LocalDate datanascimento;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "telefone")
     private String telefone;
 
     // ===== Getters e Setters MANUAIS (se quiser sobrescrever o Lombok) =====
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -76,7 +70,6 @@ public class Usuario {
     }
 
     public LocalDate getDatanascimento() {
-
         return datanascimento;
     }
 

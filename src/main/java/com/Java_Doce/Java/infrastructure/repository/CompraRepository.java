@@ -1,7 +1,15 @@
 package com.Java_Doce.Java.infrastructure.repository;
 
 import com.Java_Doce.Java.infrastructure.entitys.Compra;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CompraRepository extends JpaRepository<Compra, Long> {
+import java.util.List;
+
+@Repository
+public interface CompraRepository extends MongoRepository<Compra, String> {
+    List<Compra> findByUsuarioId(String usuarioId);
+
+    // Você pode adicionar consultas personalizadas, por exemplo:
+    // List<Compra> findByUsuarioId(String usuarioId);
 }
