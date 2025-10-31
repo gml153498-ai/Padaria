@@ -19,17 +19,9 @@
 
     </nav>
 </header>
-
-
-
-
     </div>
-
     <main>
         <h2>Nosso Menu</h2>
-
-
-
 
     <!-- BEBIDAS -->
     <h3>🥤 Bebidas</h3>
@@ -298,79 +290,6 @@
                 ? "block" : "none";
         });
     };
-
-    // Armazena as quantidades de cada item
-    const quantidades = {};
-
-    // Função para adicionar quantidade
-    function adicionar(id) {
-        if (!quantidades[id]) quantidades[id] = 0;
-        quantidades[id]++;
-        document.getElementById(`qtd-${id}`).textContent = quantidades[id];
-    }
-
-    // Função para remover quantidade
-    function remover(id) {
-        if (!quantidades[id]) quantidades[id] = 0;
-        if (quantidades[id] > 0) quantidades[id]--;
-        document.getElementById(`qtd-${id}`).textContent = quantidades[id];
-    }
-
-    // ✅ Função para adicionar o item ao carrinho
-    function comprar(id) {
-        const produtoEl = document.getElementById(`item-${id}`);
-        const nome = produtoEl.querySelector("h4").textContent;
-        const precoTexto = produtoEl.querySelector("p").textContent;
-        const qtd = quantidades[id] || 0;
-
-        if (qtd <= 0) {
-            alert("Selecione uma quantidade antes de adicionar!");
-            return;
-        }
-
-        // 💰 Converte o preço em número (remove 'R$', vírgula, etc)
-        const preco = parseFloat(precoTexto.replace("R$", "").replace(",", ".").trim());
-
-        // Pega o carrinho atual
-        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-        // Verifica se o produto já está no carrinho
-        const existente = carrinho.find(p => p.id === id);
-
-        if (existente) {
-            existente.qtd += qtd;
-        } else {
-            carrinho.push({ id, nome, preco, qtd });
-        }
-
-        // Salva novamente no localStorage
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-        // Mensagem e reset
-        alert(`${nome} adicionado ao carrinho! 🛒`);
-        quantidades[id] = 0;
-        document.getElementById(`qtd-${id}`).textContent = 0;
-    }
-
-    // ✅ Adiciona todos os produtos com quantidade > 0
-    function adicionarTodos() {
-        const todos = document.querySelectorAll(".produto");
-        let adicionou = false;
-
-        todos.forEach(produto => {
-            const id = parseInt(produto.id.split("-")[1]);
-            if (quantidades[id] && quantidades[id] > 0) {
-                comprar(id);
-                adicionou = true;
-            }
-        });
-
-        if (!adicionou) {
-            alert("Nenhum produto selecionado!");
-        } else {
-            alert("Todos os produtos foram adicionados ao carrinho! ✅");
-        }
-    }
 
 
 </script>

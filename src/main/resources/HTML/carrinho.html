@@ -20,10 +20,15 @@
     <h2>🛒 Seu Carrinho</h2>
     <div id="carrinho-container"></div>
     <h3>Total: <span id="total">R$ 0,00</span></h3>
-    <button onclick="finalizarCompra()">Finalizar Compra</button>
+
+    <div class="botoes-carrinho">
+        <button onclick="finalizarCompra()">✅ Finalizar Compra</button>
+        <button onclick="cancelarCompra()" style="background-color: #c0392b; color: white;">❌ Cancelar Compra</button>
+    </div>
 </main>
 
 <script>
+
     function carregarCarrinho() {
         const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
         const container = document.getElementById("carrinho-container");
@@ -76,7 +81,23 @@
         }
     }
 
+    function cancelarCompra() {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        if (carrinho.length === 0) {
+            alert("O carrinho já está vazio!");
+            return;
+        }
+
+        if (confirm("Tem certeza que deseja cancelar a compra e esvaziar o carrinho?")) {
+            localStorage.removeItem("carrinho");
+            carregarCarrinho();
+            alert("Compra cancelada e carrinho esvaziado.");
+        }
+    }
+
     window.onload = carregarCarrinho;
+
 </script>
+
 </body>
 </html>

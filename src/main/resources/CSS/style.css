@@ -1,306 +1,342 @@
-/* ===== Estilo geral ===== */
+/* ===== Estilo Geral Ultra Fluido ===== */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', 'Arial', sans-serif;
     margin: 0;
-    background-color: #EBDDC5; /* Pearl */
-    color: #2E4365; /* Police Blue */
+    background-color: #1B1F2A;
+    color: #EBDDC5;
+    line-height: 1.6;
+    transition: background 0.4s, color 0.4s;
+    scroll-behavior: smooth;
 }
 
+/* ===== Header ===== */
 header {
-    background-color: #2E4365; /* Police Blue */
-    color: white;
-    padding: 15px;
+    background-color: #2E4365;
+    color: #EBDDC5;
+    padding: 20px 15px;
     text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    border-bottom: 1px solid rgba(235, 221, 197, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
 }
 
-nav a {
-    color: #F3D58D; /* Buff */
-    margin: 0 10px;
+header nav a {
+    color: #F3D58D;
+    margin: 0 15px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    transition: color 0.3s, transform 0.3s;
 }
 
+header nav a:hover {
+    color: #E59D2C;
+    transform: scale(1.08);
+}
+
+/* ===== Main ===== */
 main {
-    padding: 20px;
+    padding: 40px 20px;
     text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== Fade-in ao scroll ===== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ===== Formulário ===== */
 form {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
-    margin: 40px auto; /* Ajuste no margin para centralizar com mais espaçamento */
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 35px;
+    background: #2B2F3A;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.7);
 }
 
 h2 {
-    text-align: center;
-    color: #2E4365; /* Police Blue */
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-input, button {
-    margin: 8px 0;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-button {
-    background-color: #E59D2C; /* Marigold */
-    color: white;
-    cursor: pointer;
-    border: none;
-    transition: 0.3s;
-}
-
-button:hover {
-    background-color: #C88420;
-}
-
-/* ===== Produtos ===== */
-.produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.produto {
-    background-color: #F3D58D; /* Buff */
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.produto:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.produto img {
-    width: 50%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.produto h4 {
-    margin: 10px 0 5px 0;
-    font-size: 18px;
-}
-
-.produto p {
-    margin: 5px 0;
-    font-weight: bold;
-    color: #2E4365;
-}
-
-/* ===== Controles de quantidade ===== */
-.controle {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
-
-.controle button {
-    padding: 5px 10px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-}
-
-.controle .comprar {
-    background-color: #E59D2C;
-    color: white;
-}
-
-.controle .comprar:hover {
-    background-color: #C88420;
-}
-
-.controle button:not(.comprar) {
-    background-color: #2E4365;
+    font-size: 28px;
+    margin-bottom: 30px;
     color: #F3D58D;
 }
 
-.controle button:not(.comprar):hover {
-    background-color: #1f2e4b;
+/* ===== Inputs e Botões ===== */
+input, button {
+    margin: 12px 0;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid #555842;
+    font-size: 16px;
+    background-color: #1F2128;
+    color: #EBDDC5;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #E59D2C;
+    box-shadow: 0 0 8px rgba(229,157,44,0.5);
+}
+
+button {
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background-color: #E59D2C;
+    color: #1B1F2A;
+    border-radius: 14px;
+    padding: 14px;
+    transition: all 0.4s ease;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    background-color: #C88420;
+}
+
+/* ===== Produtos Elegantes ===== */
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    margin-top: 50px;
+}
+
+.produto {
+    background-color: #2B2F3A;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.produto:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.8);
+}
+
+.produto img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 18px;
+    transition: transform 0.4s, filter 0.4s;
+}
+
+.produto img:hover {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+}
+
+.produto h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #F3D58D;
+}
+
+.produto p {
+    font-weight: bold;
+    color: #EBDDC5;
 }
 
 /* ===== Carrinho ===== */
 .item-carrinho {
     display: flex;
     justify-content: space-between;
-    background-color: #F3D58D;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 8px;
+    background-color: #2B2F3A;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-radius: 14px;
     align-items: center;
+    box-shadow: 0 5px 14px rgba(0,0,0,0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.item-carrinho button.remover {
-    background-color: #8E3B2E; /* Citrine Brown */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px 8px;
+.item-carrinho:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.7);
 }
 
-.item-carrinho button.remover:hover {
-    background-color: #67271f;
-}
-
-.botao-finalizar {
-    background-color: #E59D2C;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-}
-.carrinho-item {
-    background: #F3D58D;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
-}
-.carrinho-item button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #8E3B2E;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.carrinho-item button:hover {
-    background-color: #732C24;
-}
-
-
-.botao-finalizar:hover {
-    background-color: #C88420;
-}
-/* ====== Geral ====== */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #DCC9B0; /* tom claro */
-    color: #555842; /* verde escuro */
-}
-
-header {
-    background-color:  #2E4365;
-    color: #DCC9B0;
-    padding: 15px;
-    text-align: center;
-}
-
-header nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #DCC9B0;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: #D6A87C;
-}
-
-main {
-    text-align: center;
-    margin: 20px;
-}
-
-.pagamentos button {
-    display: block;
-    width: 200px;
-    margin: 10px auto;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-    background-color: #555842;
-    color: #fff;
-    transition: 0.3s;
-}
-
-.pagamentos button:hover {
-    background-color: #D6A87C;
-    color: #000;
-}
-
-#pix-section, #dinheiro-section {
-    margin-top: 20px;
-    display: none;
-}
-
-img.qrcode {
-    width: 200px;
-    margin-top: 10px;
-}
-
-/* Botão Ver Perfil */
-.btn-perfil {
-    background-color: #355E3B; /* Verde musgo */
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.btn-perfil:hover {
-    background-color: #E59D2C; /* Marigold */
-    color: #fff;
-}
-/* Botão flutuante no canto */
+/* ===== Botão Flutuante e Perfil ===== */
 .btn-perfil-flutuante {
     position: fixed;
-    top: 100px;
+    top: 120px;
     right: 20px;
-    background-color: #355E3B; /* Verde musgo */
+    background-color: #355E3B;
     color: #fff;
     border: none;
-    padding: 10px 15px;
+    padding: 14px 20px;
     border-radius: 50px;
     cursor: pointer;
     font-size: 16px;
     z-index: 1000;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
-    transition: 0.3s;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    transition: transform 0.4s, box-shadow 0.4s;
 }
 
 .btn-perfil-flutuante:hover {
-    background-color: #E59D2C;
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.6);
 }
 
-/* Card de perfil flutuante */
 .perfil-card {
     position: fixed;
-    top: 150px;
+    top: 180px;
     right: 20px;
-    width: 250px;
-    background: #f5f5f5;
-    border: 2px solid #333;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
-    z-index: 999;
+    width: 270px;
+    background: #1F2128;
+    border: 2px solid #555842;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
     font-size: 14px;
+    z-index: 999;
+    color: #EBDDC5;
 }
 
+/* ===== Contato ===== */
+.icones-contato {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 28px;
+}
 
+.icones-contato img {
+    width: 65px;
+    height: 65px;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.9);
+}
+
+.icones-contato img:hover {
+    transform: scale(1.18) rotate(-5deg);
+    filter: brightness(1.1);
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+    .produtos {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 22px;
+    }
+
+    .icones-contato img {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-perfil-flutuante {
+        top: 90px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .perfil-card {
+        width: 230px;
+        padding: 16px;
+    }
+
+    .icones-contato img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ===== Container centralizado ===== */
+.container-centralizado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* ocupa a altura total da tela */
+    padding: 20px;
+    background-color: #1B1F2A; /* fundo escuro */
+}
+
+/* ===== Título centralizado ===== */
+h2 {
+    text-align: center;
+    color: #F3D58D; /* dourado */
+    font-weight: 700;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* ===== Formulário estilizado ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+    width: 100%;
+    padding: 35px;
+    background: #2B2F3A;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.7);
+}
+
+input, button {
+    margin: 12px 0;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid #555842;
+    font-size: 16px;
+    background-color: #1F2128;
+    color: #EBDDC5;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #E59D2C;
+    box-shadow: 0 0 8px rgba(229,157,44,0.5);
+}
+
+button {
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background-color: #E59D2C;
+    color: #1B1F2A;
+    border-radius: 14px;
+    padding: 14px;
+    transition: all 0.4s ease;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    background-color: #C88420;
+}

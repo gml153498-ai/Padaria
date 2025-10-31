@@ -55,44 +55,6 @@
 <div id="perfil-card" class="perfil-card" style="display: none;"></div>
 
 <script>
-  function carregarPerfil() {
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
-    const card = document.getElementById("perfil-card");
-
-    if (usuario) {
-      card.innerHTML = `
-            <h3>👤 Perfil</h3>
-            <p><strong>Nome:</strong> ${usuario.nome}</p>
-            <p><strong>Cpf:</strong> ${usuario.cpf}</p>
-            <p><strong>Email:</strong> ${usuario.email}</p>
-            <p><strong>Telefone:</strong> ${usuario.telefone}</p>
-            <p><strong>Data Nascimento:</strong> ${usuario.dataNascimento}</p>
-
-            <a class="btn-perfil" href="cadastro.html">Editar Perfil</a>
-        `;
-    } else {
-      card.innerHTML = `
-            <h3>👤 Perfil</h3>
-            <p>Nenhum cadastro encontrado.</p>
-            <a class="btn-perfil" href="cadastro.html">Cadastrar</a>
-        `;
-    }
-  }
-
-  window.onload = function() {
-    carregarPerfil();
-
-    const btn = document.getElementById("btnPerfil");
-    const card = document.getElementById("perfil-card");
-
-    btn.addEventListener("click", function() {
-      if(card.style.display === "none" || card.style.display === "") {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
   function carregarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     const container = document.getElementById("carrinho-container");
