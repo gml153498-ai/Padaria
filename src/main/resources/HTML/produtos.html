@@ -7,292 +7,33 @@
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
+
 <header>
     <h1>Padaria Medeiros</h1>
     <nav>
-
         <a href="produtos.html">Produtos</a>
         <a href="carrinho.html">Carrinho</a>
         <a href="sobre.html">Sobre</a>
-
-        <script src="../JS/produtos.js"></script>
-
     </nav>
 </header>
-    </div>
-    <main>
-        <h2>Nosso Menu</h2>
 
-    <!-- BEBIDAS -->
-    <h3>🥤 Bebidas</h3>
-    <div class="produtos">
-        <div class="produto" id="item-1">
-            <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/10/james-yarema-wQFmDhrvVSs-unsplash.jpg?w=1200&h=900&crop=0" alt="Coca-Cola-2L">
-            <h4>Coca-Cola-350ML</h4>
-            <p>R$ 6,00</p>
-            <div class="controle">
-                <button onclick="remover(1)">-</button>
-                <span id="qtd-1">0</span>
-                <button onclick="adicionar(1)">+</button>
-                <button class="comprar" onclick="comprar(1)">Adicionar</button>
-            </div>
-        </div>
+<main>
+    <h2>Nosso Menu</h2>
 
-        <div class="produto" id="item-2">
-            <img src="https://i.pinimg.com/736x/a0/17/4c/a0174c008e25eff1ea5ee35a472f27fe.jpg" alt="Guaraná-350ML">
-            <h4>Guaraná-350ML</h4>
-            <p>R$ 5,00</p>
-            <div class="controle">
-                <button onclick="remover(2)">-</button>
-                <span id="qtd-2">0</span>
-                <button onclick="adicionar(2)">+</button>
-                <button class="comprar" onclick="comprar(2)">Adicionar</button>
-            </div>
-        </div>
-    </div>
+    <!-- AQUI os produtos do MongoDB serão inseridos -->
+    <div id="lista-produtos" class="produtos"></div>
 
-    <!-- SALGADOS -->
-    <h3>🥟 Salgados</h3>
-    <div class="produtos">
-        <div class="produto" id="item-3">
-            <img src="https://i.pinimg.com/736x/bf/79/ab/bf79ab952f314d8017d19ee52b1276e3.jpg" alt="Salgado de Frango-Grande">
-            <h4>Coxinha de frango</h4>
-            <p>R$ 5,00</p>
-            <div class="controle">
-                <button onclick="remover(3)">-</button>
-                <span id="qtd-3">0</span>
-                <button onclick="adicionar(3)">+</button>
-                <button class="comprar" onclick="comprar(3)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-4">
-            <img src="https://i.pinimg.com/736x/3e/ea/5f/3eea5fd0c1fa3cec2e17066f3724f870.jpg" alt="Salgado de Carne-Grande">
-            <h4>Salgado de Carne</h4>
-            <p>R$ 6,00</p>
-            <div class="controle">
-                <button onclick="remover(4)">-</button>
-                <span id="qtd-4">0</span>
-                <button onclick="adicionar(4)">+</button>
-                <button class="comprar" onclick="comprar(4)">Adicionar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- BOLOS -->
-    <h3>🍰 Bolos</h3>
-    <div class="produtos">
-        <div class="produto" id="item-5">
-            <img src="https://guiadacozinha.com.br/wp-content/uploads/2024/05/bolodecenoura-350x230.jpg" alt="Bolo de Cenoura">
-            <h4>Bolo de Cenoura</h4>
-            <p>R$ 7,00</p>
-            <div class="controle">
-                <button onclick="remover(5)">-</button>
-                <span id="qtd-5">0</span>
-                <button onclick="adicionar(5)">+</button>
-                <button class="comprar" onclick="comprar(5)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-6">
-            <img src="https://www.comidaereceitas.com.br/wp-content/uploads/2018/06/Bolo-de-chocolate-com-ganache-e-morango-freepik-780x780.jpg" alt="Bolo de Chocolate">
-            <h4>Bolo de Chocolate</h4>
-            <p>R$ 30,00</p>
-            <div class="controle">
-                <button onclick="remover(6)">-</button>
-                <span id="qtd-6">0</span>
-                <button onclick="adicionar(6)">+</button>
-                <button class="comprar" onclick="comprar(6)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-7">
-            <img src="https://i.pinimg.com/1200x/fb/81/5f/fb815f60db0e1fec7bdd9b77546f7228.jpg" alt="Bolo de Baunilha">
-            <h4>Bolo de Baunilha</h4>
-            <p>R$ 32,00</p>
-            <div class="controle">
-                <button onclick="remover(7)">-</button>
-                <span id="qtd-7">0</span>
-                <button onclick="adicionar(7)">+</button>
-                <button class="comprar" onclick="comprar(7)">Adicionar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PÃES -->
-    <h3>🥖 Pães</h3>
-    <div class="produtos">
-        <div class="produto" id="item-8">
-            <img src="https://i.pinimg.com/736x/8d/f2/21/8df22174f6b5f93f0b32d57f4d53820a.jpg" alt="Pão de Sal-unidade">
-            <h4>Pão de Sal-Unidade</h4>
-            <p>R$ 1,00</p>
-            <div class="controle">
-                <button onclick="remover(8)">-</button>
-                <span id="qtd-8">0</span>
-                <button onclick="adicionar(8)">+</button>
-                <button class="comprar" onclick="comprar(8)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-9">
-            <img src="https://i.pinimg.com/1200x/af/27/97/af2797761a856420abff7395b47e89d2.jpg" alt="Pão de Queijo-unidade-Grande">
-            <h4>Pão de Queijo-Grande-Unidade</h4>
-            <p>R$ 2,50</p>
-            <div class="controle">
-                <button onclick="remover(9)">-</button>
-                <span id="qtd-9">0</span>
-                <button onclick="adicionar(9)">+</button>
-                <button class="comprar" onclick="comprar(9)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-10">
-            <img src="https://i.pinimg.com/736x/a5/b8/df/a5b8df7021ed35e813fe65a769d30e5a.jpg" alt="Pão Careca-Unidade">
-            <h4>Pão Careca-Unidade</h4>
-            <p>R$ 0,75</p>
-            <div class="controle">
-                <button onclick="remover(10)">-</button>
-                <span id="qtd-10">0</span>
-                <button onclick="adicionar(10)">+</button>
-                <button class="comprar" onclick="comprar(10)">Adicionar</button>
-            </div>
-        </div>
-    </div>
-
-
-    </div>
-    <h3>🍬 Doces</h3>
-    <div class="produtos">
-        <div class="produto" id="item-11">
-            <img src="https://www.receitasnestle.com.br/sites/default/files/styles/recipe_detail_desktop_new/public/srh_recipes/f22d1afce5e0c571203188dd0b200aa6.webp?itok=yxHLJFEJ" alt="Brigadeiro">
-            <h4>Bombom na travessa</h4>
-            <p>R$ 10,00</p>
-            <div class="controle">
-                <button onclick="remover(11)">-</button>
-                <span id="qtd-11">0</span>
-                <button onclick="adicionar(11)">+</button>
-                <button class="comprar" onclick="comprar(11)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-12">
-            <img src="https://www.estadao.com.br/resizer/v2/MYYHJBBPXZDQHOGNS7FOASAJKE.jpg?quality=80&auth=e62f562afe42e8c9914d5ac5b4d0dcd7ab3e7a9843c38c38550aa87b62a5e06f&width=720&height=410&focal=1984,1633" alt="Morango do Amor">
-            <h4>Morango do Amor</h4>
-            <p>R$ 10,00</p>
-            <div class="controle">
-                <button onclick="remover(12)">-</button>
-                <span id="qtd-12">0</span>
-                <button onclick="adicionar(12)">+</button>
-                <button class="comprar" onclick="comprar(12)">Adicionar</button>
-            </div>
-        </div>
-    </div>
-    <h3>🥤 Sucos Naturais</h3>
-    <div class="produtos">
-        <div class="produto" id="item-13">
-            <img src="https://static.ndmais.com.br/2025/05/suco-de-laranja-800x534.jpg" alt="Suco de Laranja">
-            <h4>Suco de Laranja</h4>
-            <p>R$ 7,00</p>
-            <div class="controle">
-                <button onclick="remover(13)">-</button>
-                <span id="qtd-13">0</span>
-                <button onclick="adicionar(13)">+</button>
-                <button class="comprar" onclick="comprar(13)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-14">
-            <img src="https://receitadaboa.com.br/wp-content/uploads/2024/12/suco-de-manga.jpg" alt="Suco de Manga">
-            <h4>Suco de Manga</h4>
-            <p>R$ 8,00</p>
-            <div class="controle">
-                <button onclick="remover(14)">-</button>
-                <span id="qtd-14">0</span>
-                <button onclick="adicionar(14)">+</button>
-                <button class="comprar" onclick="comprar(14)">Adicionar</button>
-            </div>
-        </div>
-    </div>
-    <h3>🧀 Frios</h3>
-    <div class="produtos">
-        <div class="produto" id="item-15">
-            <img src="https://www.hortifruti.com.br/_next/image?url=https%3A%2F%2Fhortifrutibr.vtexassets.com%2Farquivos%2Fids%2F172927%2FPresunto-sem-Capa-Cozido-Fatiado-Sadia.jpg%3Fv%3D638671096205000000%26format%3Dwebp&w=768&q=75" alt="Presunto Fatiado">
-            <h4>Presunto Fatiado</h4>
-            <p>R$ 12,00</p>
-            <div class="controle">
-                <button onclick="remover(15)">-</button>
-                <span id="qtd-15">0</span>
-                <button onclick="adicionar(15)">+</button>
-                <button class="comprar" onclick="comprar(15)">Adicionar</button>
-            </div>
-        </div>
-
-        <div class="produto" id="item-16">
-            <img src="https://phygital-files.mercafacil.com/peruzzo/uploads/produto/queijo_mussarela_fatiado_kg_2d1ca2f6-7210-4eee-ab1f-ae8964b7690e.jpg" alt="Queijo Minas">
-            <h4>Queijo Minas</h4>
-            <p>R$ 15,00</p>
-            <div class="controle">
-                <button onclick="remover(16)">-</button>
-                <span id="qtd-16">0</span>
-                <button onclick="adicionar(16)">+</button>
-                <button class="comprar" onclick="comprar(16)">Adicionar</button>
-            </div>
-        </div>
-    </div>
     <div style="margin-top: 30px; text-align: center;">
-        <button class="comprar" onclick="adicionarTodos()">🛒 Adicionar Todos </button>
+        <button class="comprar" onclick="adicionarTodos()">🛒 Adicionar Todos</button>
     </div>
-
 </main>
 
+<footer>
+    <p>Padaria Medeiros © 2025 - Todos os direitos reservados.</p>
+</footer>
 
+<!-- IMPORTANTE: Script deve ficar no final -->
 <script src="../JS/produtos.js"></script>
-<!-- Botão flutuante -->
-<button id="btnPerfil" class="btn-perfil-flutuante">👤 Ver Perfil</button>
-
-<!-- Card do perfil -->
-<div id="perfil-card" class="perfil-card" style="display: none;"></div>
-
-<script>
-    // ✅ Perfil do usuário
-    function carregarPerfil() {
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-        const card = document.getElementById("perfil-card");
-
-        if (usuario) {
-            card.innerHTML = `
-                <h3>👤 Perfil</h3>
-                <p><strong>Nome:</strong> ${usuario.nome}</p>
-                <p><strong>CPF:</strong> ${usuario.cpf}</p>
-                <p><strong>Email:</strong> ${usuario.email}</p>
-                <p><strong>Telefone:</strong> ${usuario.telefone}</p>
-                <p><strong>Nascimento:</strong> ${usuario.dataNascimento}</p>
-                <a class="btn-perfil" href="cadastro.html">Editar Perfil</a>
-            `;
-        } else {
-            card.innerHTML = `
-                <h3>👤 Perfil</h3>
-                <p>Nenhum cadastro encontrado.</p>
-                <a class="btn-perfil" href="cadastro.html">Cadastrar</a>
-            `;
-        }
-    }
-
-    // ✅ Exibe o card do perfil
-    window.onload = function() {
-        carregarPerfil();
-
-        const btn = document.getElementById("btnPerfil");
-        const card = document.getElementById("perfil-card");
-
-        btn.addEventListener("click", () => {
-            card.style.display = (card.style.display === "none" || card.style.display === "")
-                ? "block" : "none";
-        });
-    };
-
-
-</script>
 
 </body>
 </html>

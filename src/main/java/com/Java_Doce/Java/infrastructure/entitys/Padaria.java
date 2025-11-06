@@ -3,17 +3,16 @@ package com.Java_Doce.Java.infrastructure.entitys;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "produtos") // define a coleção no MongoDB
+@Document(collection = "produtos")
 public class Padaria {
 
     @Id
-    private String id; // MongoDB usa String para o ID
-
+    private String id;
+    private String imagem; // Campo imagem adicionado
     private String nome;
     private Double preco;
     private Integer quantidade;
 
-    private String imagem;
     // ===== Getters e Setters =====
     public String getId() {
         return id;
@@ -21,6 +20,14 @@ public class Padaria {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getImagem() { // GETTER para imagem
+        return imagem;
+    }
+
+    public void setImagem(String imagem) { // SETTER para imagem
+        this.imagem = imagem;
     }
 
     public String getNome() {

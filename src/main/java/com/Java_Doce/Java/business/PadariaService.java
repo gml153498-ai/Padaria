@@ -31,10 +31,11 @@ public class PadariaService {
     public Padaria atualizarPadaria(String id, Padaria novaPadaria){
         Padaria existente = padariaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item de padaria não encontrado com ID: " + id));
-
+         if (novaPadaria.getImagem() != null) existente.setImagem(novaPadaria.getImagem());
         if (novaPadaria.getNome() != null) existente.setNome(novaPadaria.getNome());
         if (novaPadaria.getPreco() != null) existente.setPreco(novaPadaria.getPreco());
         if (novaPadaria.getQuantidade() != null) existente.setQuantidade(novaPadaria.getQuantidade());
+
 
         return padariaRepository.save(existente);
     }
@@ -43,3 +44,5 @@ public class PadariaService {
         padariaRepository.deleteById(id);
     }
 }
+
+
