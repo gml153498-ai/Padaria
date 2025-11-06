@@ -13,6 +13,7 @@ public class Padaria {
     private Double preco;
     private Integer quantidade;
 
+    private String imagem;
     // ===== Getters e Setters =====
     public String getId() {
         return id;

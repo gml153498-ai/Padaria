@@ -9,10 +9,7 @@
 <body>
 <header>
   <h1>Padaria Medeiros</h1>
-  <nav>
-
-
-  </nav>
+  <nav></nav>
 </header>
 
 <main>
@@ -20,81 +17,39 @@
 
   <div class="pagamentos">
     <button onclick="mostrarPix()">Pix</button>
-
     <button onclick="mostrarDinheiro()">Dinheiro</button>
   </div>
 
   <!-- PIX -->
-  <div id="pix-section">
+  <div id="pix-section" class="pagamento-section" style="display: none;">
     <h3>📱 Pague com Pix</h3>
     <p>Escaneie o QR Code abaixo:</p>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=PadariaMedeirosPIX123"
          alt="QR Code Pix" class="qrcode">
     <p><strong>Chave Pix:</strong> 059.703.791-40</p>
-    <button onclick="finalizar()">✅ Confirmar Pagamento</button>
+    <button onclick="confirmarPagamento('PIX')">✅ Confirmar Pagamento</button>
   </div>
 
   <!-- DINHEIRO -->
-  <div id="dinheiro-section">
+  <div id="dinheiro-section" class="pagamento-section" style="display: none;">
     <h3>💵 Pagamento em Dinheiro</h3>
     <p>Total da compra: <strong id="total-compra">R$ 0,00</strong></p>
     <label>Quanto vai pagar? </label>
     <input type="number" id="valorCliente" placeholder="Ex: 50.00" step="0.01">
     <button onclick="calcularTroco()">Calcular Troco</button>
     <p id="resultadoTroco"></p>
-    <button onclick="finalizar()">✅ Confirmar Pagamento</button>
+    <button onclick="confirmarPagamento('Dinheiro')">✅ Confirmar Pagamento</button>
+  </div>
+
+  <!-- NOTA FISCAL -->
+  <div id="nota-fiscal" class="nota-fiscal" style="display: none;">
+    <h3>🧾 Nota Fiscal</h3>
+    <div id="detalhes-nota"></div>
+    <!-- Botão Fechar adicionado aqui -->
+    <button onclick="finalizar()" class="btn-fechar">Fechar e Voltar aos Produtos</button>
   </div>
 </main>
 
 <script src="../JS/pagamento.js"></script>
-<script src="../JS/produtos.js"></script>
-<!-- Botão flutuante -->
-<button id="btnPerfil" class="btn-perfil-flutuante">👤 Ver Perfil</button>
-
-<!-- Card do perfil -->
-<div id="perfil-card" class="perfil-card" style="display: none;"></div>
-
-<script>
-  function carregarCarrinho() {
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    const container = document.getElementById("carrinho-container");
-    container.innerHTML = "";
-    let total = 0;
-
-    if (carrinho.length === 0) {
-      container.innerHTML = "<p>Seu carrinho está vazio 😢</p>";
-      document.getElementById("total").innerText = "R$ 0,00";
-      return;
-    }
-
-    carrinho.forEach((item, index) => {
-      const subtotal = item.qtd * item.preco;
-      total += subtotal;
-
-      const card = document.createElement("div");
-      card.className = "carrinho-item";
-      card.innerHTML = `
-            <h4>${item.nome}</h4>
-            <p>Qtd: ${item.qtd} | Preço Unit: R$ ${item.preco.toFixed(2)}</p>
-            <p>Subtotal: R$ ${subtotal.toFixed(2)}</p>
-            <button onclick="removerItem(${index})">❌ Remover</button>
-        `;
-      container.appendChild(card);
-    });
-
-    document.getElementById("total").innerText = "R$ " + total.toFixed(2);
-  }
-
-  function removerItem(index) {
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    carrinho.splice(index, 1);
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    carregarCarrinho();
-  }
-
-</script>
-
-
-
 </body>
 </html>
