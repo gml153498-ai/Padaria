@@ -1,9 +1,14 @@
+let todosProdutos = []; // salva todos os produtos do backend
+
 async function carregarProdutos() {
     const resposta = await fetch("http://localhost:8080/padaria");
-    const lista = await resposta.json();
+    todosProdutos = await resposta.json();
+    exibirProdutos(todosProdutos);
+}
 
+function exibirProdutos(lista) {
     const container = document.getElementById("lista-produtos");
-    container.innerHTML = ""; // limpa
+    container.innerHTML = "";
 
     lista.forEach(produto => {
         container.innerHTML += `
@@ -11,6 +16,7 @@ async function carregarProdutos() {
                 <img src="${produto.imagem}" alt="${produto.nome}">
                 <h4>${produto.nome}</h4>
                 <p>R$ ${produto.preco.toFixed(2)}</p>
+                <small class="categoria">${produto.categoria}</small>
 
                 <div class="controle">
                     <button onclick="remover('${produto.id}')">-</button>
@@ -23,7 +29,16 @@ async function carregarProdutos() {
     });
 }
 
-// + / - mantidos
+function filtrar(cat) {
+    if (cat === "todas") {
+        exibirProdutos(todosProdutos);
+    } else {
+        const filtrados = todosProdutos.filter(p => p.categoria === cat);
+        exibirProdutos(filtrados);
+    }
+}
+
+// + e -
 function adicionar(id) {
     const qtd = document.getElementById("qtd-" + id);
     qtd.innerText = parseInt(qtd.innerText) + 1;
@@ -40,14 +55,15 @@ function remover(id) {
 function comprar(id) {
     const qtd = parseInt(document.getElementById("qtd-" + id).innerText);
     const card = document.getElementById("item-" + id);
-
     const nome = card.querySelector("h4").innerText;
     const preco = parseFloat(card.querySelector("p").innerText.replace("R$ ", "").replace(",", "."));
 
     if (qtd > 0) {
         let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
         carrinho.push({ id, nome, qtd, preco });
+
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
         alert(`✅ ${qtd}x ${nome} adicionado(s) ao carrinho!`);
         document.getElementById("qtd-" + id).innerText = 0;
     } else {
@@ -67,6 +83,7 @@ function adicionarTodos() {
         if (qtd > 0) {
             const nome = produto.querySelector("h4").innerText;
             const preco = parseFloat(produto.querySelector("p").innerText.replace("R$ ", "").replace(",", "."));
+
             carrinho.push({ id, nome, qtd, preco });
             document.getElementById("qtd-" + id).innerText = 0;
             adicionou = true;
@@ -81,5 +98,5 @@ function adicionarTodos() {
     }
 }
 
-// Carrega na tela ao abrir
+// Carregar ao abrir a página
 window.onload = carregarProdutos;
