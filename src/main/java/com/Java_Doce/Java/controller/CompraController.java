@@ -12,11 +12,31 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/compras")
 @RequiredArgsConstructor
 public class CompraController {
-private final CompraService compraService;
-@PostMapping
-    public ResponseEntity<Compra> criarCompra(@RequestBody CompraRequestDTO dto){
-    Compra novaCompra = compraService.criarCompraComDTO(dto);
-    return ResponseEntity.ok(novaCompra);
-}
-}
 
+    private final CompraService compraService;
+
+    @PostMapping
+    public ResponseEntity<?> criarCompra(@RequestBody CompraRequestDTO dto) {
+
+        // ✅ Validações básicas pra evitar erro no sistema
+        if (dto.getUsuarioId() == null || dto.getUsuarioId().isEmpty()) {
+            return ResponseEntity.badRequest().body("Usuário não informado.");
+        }
+
+        if (dto.getProdutosIds() == null || dto.getProdutosIds().isEmpty()) {
+            return ResponseEntity.badRequest().body("Lista de produtos vazia.");
+        }
+
+        if (dto.getQuantidade() == null || dto.getQuantidade() <= 0) {
+            return ResponseEntity.badRequest().body("Quantidade inválida.");
+        }
+
+        if (dto.getValorTotal() == null || dto.getValorTotal().doubleValue() <= 0) {
+            return ResponseEntity.badRequest().body("Valor total inválido.");
+        }
+
+        Compra novaCompra = compraService.criarCompraComDTO(dto);
+
+        return ResponseEntity.ok(novaCompra);
+    }
+}

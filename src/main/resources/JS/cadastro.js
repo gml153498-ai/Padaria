@@ -10,7 +10,6 @@ document.getElementById("formCadastro").addEventListener("submit", async functio
     };
 
     try {
-        // 🔗 Verifique se o endpoint está plural: /usuarios (como no seu Controller)
         const response = await fetch("http://localhost:8080/usuarios", {
             method: "POST",
             headers: { "Content-Type": "application/json" },

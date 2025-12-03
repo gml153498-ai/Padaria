@@ -1,5 +1,6 @@
-let todosProdutos = []; // salva todos os produtos do backend
+let todosProdutos = [];
 
+// Carregar produtos do backend
 async function carregarProdutos() {
     const resposta = await fetch("http://localhost:8080/padaria");
     todosProdutos = await resposta.json();
@@ -29,6 +30,7 @@ function exibirProdutos(lista) {
     });
 }
 
+// Filtro por categoria
 function filtrar(cat) {
     if (cat === "todas") {
         exibirProdutos(todosProdutos);
@@ -38,12 +40,13 @@ function filtrar(cat) {
     }
 }
 
-// + e -
+// + Quantidade
 function adicionar(id) {
     const qtd = document.getElementById("qtd-" + id);
     qtd.innerText = parseInt(qtd.innerText) + 1;
 }
 
+// - Quantidade
 function remover(id) {
     const qtd = document.getElementById("qtd-" + id);
     if (parseInt(qtd.innerText) > 0) {
@@ -51,40 +54,58 @@ function remover(id) {
     }
 }
 
-// Adicionar item ao carrinho
+// ✅ FUNÇÃO COMPRAR TOTALMENTE CORRIGIDA
 function comprar(id) {
-    const qtd = parseInt(document.getElementById("qtd-" + id).innerText);
+    const qtdSelecionada = parseInt(document.getElementById("qtd-" + id).innerText);
     const card = document.getElementById("item-" + id);
     const nome = card.querySelector("h4").innerText;
-    const preco = parseFloat(card.querySelector("p").innerText.replace("R$ ", "").replace(",", "."));
+    const preco = parseFloat(
+        card.querySelector("p").innerText.replace("R$ ", "").replace(",", ".")
+    );
 
-    if (qtd > 0) {
+    if (qtdSelecionada > 0) {
         let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-        carrinho.push({ id, nome, qtd, preco });
+
+        const produtoExistente = carrinho.find(item => item.id === id);
+
+        if (produtoExistente) {
+            produtoExistente.qtd += qtdSelecionada;
+        } else {
+            carrinho.push({ id, nome, qtd: qtdSelecionada, preco });
+        }
 
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-        alert(`✅ ${qtd}x ${nome} adicionado(s) ao carrinho!`);
+        alert(`✅ ${qtdSelecionada}x ${nome} adicionado(s) ao carrinho!`);
         document.getElementById("qtd-" + id).innerText = 0;
     } else {
         alert("⚠️ Escolha ao menos 1 unidade antes de adicionar!");
     }
 }
 
-// Adicionar todos
+// ✅ ADICIONAR TODOS CORRIGIDO (SEM DUPLICAR)
 function adicionarTodos() {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     let adicionou = false;
 
     document.querySelectorAll(".produto").forEach(produto => {
         const id = produto.id.replace("item-", "");
-        const qtd = parseInt(document.getElementById("qtd-" + id).innerText);
+        const qtdSelecionada = parseInt(document.getElementById("qtd-" + id).innerText);
 
-        if (qtd > 0) {
+        if (qtdSelecionada > 0) {
             const nome = produto.querySelector("h4").innerText;
-            const preco = parseFloat(produto.querySelector("p").innerText.replace("R$ ", "").replace(",", "."));
+            const preco = parseFloat(
+                produto.querySelector("p").innerText.replace("R$ ", "").replace(",", ".")
+            );
 
-            carrinho.push({ id, nome, qtd, preco });
+            const produtoExistente = carrinho.find(item => item.id === id);
+
+            if (produtoExistente) {
+                produtoExistente.qtd += qtdSelecionada;
+            } else {
+                carrinho.push({ id, nome, qtd: qtdSelecionada, preco });
+            }
+
             document.getElementById("qtd-" + id).innerText = 0;
             adicionou = true;
         }
@@ -98,5 +119,5 @@ function adicionarTodos() {
     }
 }
 
-// Carregar ao abrir a página
+// Carregar tudo ao abrir a página
 window.onload = carregarProdutos;

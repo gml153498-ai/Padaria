@@ -1,110 +1,198 @@
-// Recupera o total do carrinho (salvo no localStorage antes de limpar)
-const totalCompra = localStorage.getItem("totalCompra") || 0;
-document.getElementById("total-compra").innerText = "R$ " + parseFloat(totalCompra).toFixed(2);
+// ✅ Recupera o total do carrinho
+const totalCompra = parseFloat(localStorage.getItem("totalCompra")) || 0;
 
+document.getElementById("total-compra").innerText =
+    "R$ " + totalCompra.toFixed(2);
+
+// ✅ Mostrar PIX
 function mostrarPix() {
     document.getElementById("pix-section").style.display = "block";
     document.getElementById("dinheiro-section").style.display = "none";
     document.getElementById("nota-fiscal").style.display = "none";
 }
 
+// ✅ Mostrar Dinheiro
 function mostrarDinheiro() {
     document.getElementById("dinheiro-section").style.display = "block";
     document.getElementById("pix-section").style.display = "none";
     document.getElementById("nota-fiscal").style.display = "none";
 }
 
+// ✅ Calcular troco corretamente
 function calcularTroco() {
     const valorPago = parseFloat(document.getElementById("valorCliente").value);
-    const total = parseFloat(totalCompra);
-    if (isNaN(valorPago) || valorPago < total) {
-        document.getElementById("resultadoTroco").innerText = "⚠️ Valor insuficiente!";
+
+    if (isNaN(valorPago) || valorPago < totalCompra) {
+        document.getElementById("resultadoTroco").innerText =
+            "⚠️ Valor insuficiente!";
         return;
     }
-    const troco = valorPago - total;
-    document.getElementById("resultadoTroco").innerText = "Troco: R$ " + troco.toFixed(2);
+
+    const troco = valorPago - totalCompra;
+
+    document.getElementById("resultadoTroco").innerText =
+        "Troco: R$ " + troco.toFixed(2);
 }
 
-function confirmarPagamento(tipo) {
-    // Verificar se é pagamento em dinheiro e se o valor é suficiente
-    if (tipo === 'Dinheiro') {
-        const valorPago = parseFloat(document.getElementById("valorCliente").value);
-        const total = parseFloat(totalCompra);
+// ✅ CONFIRMAR PAGAMENTO + SALVAR NO BACKEND (CORRIGIDO)
+async function confirmarPagamento(tipo) {
 
-        if (isNaN(valorPago) || valorPago < total) {
-            alert("⚠️ Valor insuficiente! Por favor, insira um valor igual ou maior que o total da compra.");
+    if (tipo === "Dinheiro") {
+        const valorPago = parseFloat(document.getElementById("valorCliente").value);
+
+        if (isNaN(valorPago) || valorPago < totalCompra) {
+            alert("⚠️ Valor insuficiente!");
             return;
         }
     }
 
-    // Gerar nota fiscal antes do alerta
-    gerarNotaFiscal(tipo);
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    const usuarioId = localStorage.getItem("usuarioId");
 
-    alert(`✅ Pagamento via ${tipo} confirmado! Obrigado pela preferência.`);
+    if (!usuarioId) {
+        alert("⚠️ Usuário não identificado!");
+        return;
+    }
 
-    // Mostrar a nota fiscal
-    document.getElementById("nota-fiscal").style.display = "block";
-    document.getElementById("pix-section").style.display = "none";
-    document.getElementById("dinheiro-section").style.display = "none";
+    if (carrinho.length === 0) {
+        alert("⚠️ Carrinho vazio!");
+        return;
+    }
+
+    // ✅ AGORA ENVIA APENAS OS IDS ÚNICOS
+    const produtosIds = carrinho.map(item => item.id);
+
+    // ✅ QUANTIDADE TOTAL REAL
+    const quantidadeTotal = carrinho.reduce(
+        (soma, item) => soma + item.qtd,
+        0
+    );
+
+    const compraDTO = {
+        usuarioId: usuarioId,
+        produtosIds: produtosIds,  // ✅ sem duplicação
+        quantidade: quantidadeTotal, // ✅ quantidade real
+        valorTotal: totalCompra,
+    };
+
+    try {
+        const response = await fetch("http://localhost:8080/compras", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(compraDTO),
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao salvar a compra");
+        }
+
+        const compraSalva = await response.json();
+        console.log("✅ Compra salva:", compraSalva);
+
+        gerarNotaFiscal(tipo);
+
+        alert(`✅ Pagamento via ${tipo} confirmado!`);
+
+        document.getElementById("nota-fiscal").style.display = "block";
+        document.getElementById("pix-section").style.display = "none";
+        document.getElementById("dinheiro-section").style.display = "none";
+
+    } catch (error) {
+        console.error(error);
+        alert("❌ Erro ao registrar a compra no sistema.");
+    }
 }
 
+// ✅ GERAR NOTA FISCAL (ORGANIZADA)
 function gerarNotaFiscal(tipoPagamento) {
-    // Recupera o carrinho do localStorage
+
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    const total = parseFloat(totalCompra);
     const agora = new Date();
 
     let htmlNota = `
-        <div class="nota-fiscal-content">
-            <p><strong>Padaria Medeiros</strong></p>
-            <p>CNPJ: 12.345.678/0001-90</p>
-            <p>Data: ${agora.toLocaleDateString()} ${agora.toLocaleTimeString()}</p>
-            <hr>
-            <p><strong>Itens comprados:</strong></p>
-            <div class="itens-comprados">
+    <div class="nota-fiscal-content" style="
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px dashed #333;
+        border-radius: 10px;
+        background: #fff;
+        font-family: monospace;
+    ">
+        <h2 style="text-align:center;">🧾 NOTA FISCAL</h2>
+
+        <p style="text-align:center; font-weight:bold;">
+            Padaria Medeiros
+        </p>
+
+        <p style="text-align:center; font-size:14px;">
+            CNPJ: 12.345.678/0001-90
+        </p>
+
+        <hr>
+
+        <p><strong>Data:</strong> ${agora.toLocaleDateString()} ${agora.toLocaleTimeString()}</p>
+
+        <p><strong>Forma de Pagamento:</strong> ${tipoPagamento}</p>
+
+        <hr>
+
+        <h4>🛒 Itens Comprados</h4>
     `;
 
-    // Adiciona cada item do carrinho
     carrinho.forEach(item => {
         const subtotal = item.qtd * item.preco;
+
         htmlNota += `
-            <div class="item-nota">
-                <p>${item.qtd}x ${item.nome} - R$ ${subtotal.toFixed(2)}</p>
-            </div>
+        <div style="display:flex; justify-content:space-between;">
+            <span>${item.qtd}x ${item.nome}</span>
+            <span>R$ ${subtotal.toFixed(2)}</span>
+        </div>
         `;
     });
 
     htmlNota += `
-            </div>
-            <hr>
-            <p><strong>Total: R$ ${total.toFixed(2)}</strong></p>
-            <p><strong>Forma de pagamento:</strong> ${tipoPagamento}</p>
+        <hr>
+
+        <div style="display:flex; justify-content:space-between; font-size:18px;">
+            <strong>Total:</strong>
+            <strong>R$ ${totalCompra.toFixed(2)}</strong>
+        </div>
     `;
 
-    // Adiciona informações de troco se for pagamento em dinheiro
-    if (tipoPagamento === 'Dinheiro') {
-        const valorPago = parseFloat(document.getElementById("valorCliente").value) || total;
-        const troco = valorPago - total;
+    if (tipoPagamento === "Dinheiro") {
+        const valorPago =
+            parseFloat(document.getElementById("valorCliente").value) || totalCompra;
+
+        const troco = valorPago - totalCompra;
+
         htmlNota += `
-            <p><strong>Valor pago:</strong> R$ ${valorPago.toFixed(2)}</p>
-            <p><strong>Troco:</strong> R$ ${troco.toFixed(2)}</p>
+        <hr>
+        <p><strong>Valor Pago:</strong> R$ ${valorPago.toFixed(2)}</p>
+        <p><strong>Troco:</strong> R$ ${troco.toFixed(2)}</p>
         `;
     }
 
     htmlNota += `
-            <hr>
-            <p><strong>Obrigado pela preferência! Volte sempre! 🥖</strong></p>
-        </div>
+        <hr>
+
+        <p style="text-align:center; margin-top:15px;">
+            🥖 Obrigado pela preferência!<br>
+            Volte sempre!
+        </p>
+    </div>
     `;
 
     document.getElementById("detalhes-nota").innerHTML = htmlNota;
 }
 
+// ✅ FINALIZAR COMPRA
 function finalizar() {
+
     alert("🎉 Pedido concluído! Obrigado por comprar na Padaria Medeiros.");
 
-    // Limpar carrinho e redirecionar
     localStorage.removeItem("carrinho");
     localStorage.removeItem("totalCompra");
+
     window.location.href = "produtos.html";
 }
